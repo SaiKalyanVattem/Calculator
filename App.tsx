@@ -1,111 +1,88 @@
 import React, { useState } from 'react';
 import './style.css';
-
 function App() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confPassword, setConfPassword] = useState('');
+  const [result, setResult] = useState('');
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  const handleSubmit = (e) => {
+    setResult(result.concat(e.target.name));
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const clear = () => {
+    setResult('');
   };
 
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
+  const backSpace = () => {
+    setResult(result.slice(0, result.length - 1));
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleCpasswordChange = (e) => {
-    setConfPassword(e.target.value);
-  };
-
-  function handleSubmit() {
-    if (password != confPassword) {
-      alert('Password Does Not Match');
-    } else {
-      alert(
-        'A form was submitted with Name :"' +
-          name +
-          '" ,Age :"' +
-          age +
-          '" and Email :"' +
-          email +
-          '"'
-      );
+  const total = () => {
+    try {
+      setResult(eval(result).toString());
+    } catch (err) {
+      setResult('Error');
     }
-    // console.log('Hai');
-  }
-
+  };
   return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <label>Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => {
-            handleNameChange(e);
-          }}
-          placeholder="Enter Your Name"
-        />
-        <br />
-        <label>Age:</label>
-        <input
-          type="text"
-          value={age}
-          onChange={(e) => {
-            handleAgeChange(e);
-          }}
-          placeholder="Enter Your Age"
-        />
-        <br />
-        <label>Email:</label>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => {
-            handleEmailChange(e);
-          }}
-          placeholder="Enter Your Email"
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="text"
-          value={password}
-          onChange={(e) => {
-            handlePasswordChange(e);
-          }}
-          placeholder="Enter Your Password"
-        />
-        <br />
-        <label>Confirm Password:</label>
-        <input
-          type="text"
-          value={confPassword}
-          onChange={(e) => {
-            handleCpasswordChange(e);
-          }}
-          placeholder="Confirm Your Password"
-        />
-        <br />
-        <input type="submit" value="Submit Form" />
-        {/* <button onClick={handleSubmit}>Submit Form</button> */}
+    <div className="container">
+      <form>
+        <input type="text" value={result} />
       </form>
+      <div className="keypad">
+        <button id="clear" onClick={clear}>
+          Clear
+        </button>
+        <button onClick={backSpace} id="backSpace">
+          C
+        </button>
+        <button name="/" onClick={handleSubmit}>
+          /
+        </button>
+        <button name="7" onClick={handleSubmit}>
+          7
+        </button>
+        <button name="8" onClick={handleSubmit}>
+          8
+        </button>
+        <button name="9" onClick={handleSubmit}>
+          9
+        </button>
+        <button name="*" onClick={handleSubmit}>
+          *
+        </button>
+        <button name="6" onClick={handleSubmit}>
+          6
+        </button>
+        <button name="5" onClick={handleSubmit}>
+          5
+        </button>
+        <button name="4" onClick={handleSubmit}>
+          4
+        </button>
+        <button name="-" onClick={handleSubmit}>
+          -
+        </button>
+        <button name="3" onClick={handleSubmit}>
+          3
+        </button>
+        <button name="2" onClick={handleSubmit}>
+          2
+        </button>
+        <button name="1" onClick={handleSubmit}>
+          1
+        </button>
+        <button onClick={handleSubmit}>+</button>
+        <button name="+" onClick={handleSubmit}>
+          0
+        </button>
+        <button onClick={total} id="total">
+          =
+        </button>
+        <button name="." onClick={handleSubmit}>
+          .
+        </button>
+      </div>
     </div>
   );
 }
+
 export default App;
